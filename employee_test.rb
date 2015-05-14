@@ -17,4 +17,9 @@ class EmployeeTest < Minitest::Test
   def test_create_new_employee
     assert Employee
   end
+
+  def test_create_individual_employees
+    assert_equal "Justin", Employee.new("Justin").name
+  end
+
 end
