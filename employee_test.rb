@@ -14,12 +14,29 @@ class EmployeeTest < Minitest::Test
     assert_equal "Accounts", Department.new("Accounts").name
   end
 
-  def test_create_new_employee
+  def test_create_new_employee_class
     assert Employee
   end
 
-  def test_create_individual_employees
-    assert_equal "Justin", Employee.new("Justin").name
+  def test_create_employee_given_info
+    assert Employee.new(name).info
   end
+
+
+  def test_add_employee_to_department
+    assert Department.new(name).assign
+  end
+
+  def test_get_an_employee_name
+    assert_equal "Justin", Employee.new("Justin").info[:name]
+  end
+
+
+  # def test_create_individual_employees
+  #   assert_equal "Justin", Employee.new.info[:name]
+  # end
+
+  # def test_get_employees_salary
+  # end
 
 end
