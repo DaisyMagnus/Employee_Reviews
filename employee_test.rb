@@ -28,7 +28,7 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_get_an_employee_name
-    assert_equal "Justin", Employee.new("Justin").name
+    assert_equal "Don", Employee.new("Don").name
 
   end
 
@@ -46,8 +46,12 @@ class EmployeeTest < Minitest::Test
   # end
 
   def test_get_employees_salary
-    assert_equal 80000, Employee.new("Peggy").info["Peggy"][:salary]
+    assert_equal 8000, Employee.new("Peggy").info["Peggy"][:salary]
+    assert_equal 25000, Employee.new("Roger").info["Roger"][:salary]
   end
 
+  def test_add_employee_review
+    assert Department.new("Peggy").reviews[:Peggy_review]
+  end
 
 end
