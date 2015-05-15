@@ -36,9 +36,9 @@ class EmployeeTest < Minitest::Test
     assert "Accounts", Department.name
   end
 
-  # def test_get_total_salary_for_department
-  #   assert 500000, @employees.get all salaries for hash and add
-  # end
+  def test_get_total_salary_for_department
+     assert 500000, Department.new("Marketing").total
+  end
 
   # def test_create_individual_employees
   #   assert_equal "Justin", Employee.new.info[:name]
@@ -46,7 +46,8 @@ class EmployeeTest < Minitest::Test
   # end
 
   def test_get_employees_salary
-    assert_equal 80000, Employee.new("Justin").info["Justin"][:salary]
+    assert_equal 80000, Employee.new("Peggy").info["Peggy"][:salary]
   end
+
 
 end
