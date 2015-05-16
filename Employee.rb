@@ -1,20 +1,25 @@
 class Employee
-def initialize(name)
+  attr_reader :name, :email, :phone_number, :salary, :reviews, :satisfactory
+def initialize(name, email, phone_number, salary=0)
   @name = name
-  @info = {}
-  #for @info.each do |name, salary| puts name, salary end
+  @salary = salary
+  @email = email
+  @phone_number = phone_number
+  @reviews = []
+  @satisfactory = nil
 end
 
-def info
-   @info = {"Peggy"=>{:name => name, :salary => 8000, :phone => 9193567878, :email => "peggy@scdp.com"},
-            "Don"=>{:name => name, :salary => 20000, :phone => 9193569999, :email => "dondraper@scdp.com"},
-            "Roger"=>{:salary => 25000, :phone => 9195556677, :email => "rogersterling@scdp.com"},
-            "Joan"=>{:salary => 15000, :phone => 9199192222, :email => "joanie@scdp.com"}}
-
+def add_review(review)
+  @reviews << review
 end
 
-def name
-  @name
+def performance(value)
+  @satisfactory = value
+  # if value == true
+  #   @satisfactory = true
+  # else
+  #   @satisfactory = false
+  # end
 end
 
 end
