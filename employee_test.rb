@@ -11,7 +11,7 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_create_new_department_given_name
-    assert_equal "Advertising", Department.new("Advertising").name
+    assert_equal "Advertising", Department.new(name: "Advertising").name
   end
 
   def test_create_new_employee_class
@@ -31,7 +31,7 @@ class EmployeeTest < Minitest::Test
     don = Employee.new("Don", "don@scdp.com", 1231231234, 10000)
     pete = Employee.new("Pete", "pete@scdp.com", 1231231234, 10000)
     joan = Employee.new("Joan", "joan@scdp.com", 1231235555, 10000)
-    department = Department.new("Advertising")
+    department = Department.new(name: "Advertising")
     department.assign(pete)
     department.assign(don)
     department.assign(joan)
@@ -47,7 +47,7 @@ class EmployeeTest < Minitest::Test
     don = Employee.new("Don", "don@don.com", 1231231234, 10000)
     tom = Employee.new("Tom", "tom@don.com", 1231231234, 10000)
     joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
-    department = Department.new("Advertising")
+    department = Department.new(name: "Advertising")
     department.assign(don, tom, joan)
     department.total_salary
   end
@@ -74,7 +74,7 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_give_raise_to_department
-    department = Department.new("Advertising")
+    department = Department.new(name: "Advertising")
     don = Employee.new("Don", "don@don.com", 1231231234, 10000)
     roger = Employee.new("Roger", "roger@don.com", 1231231234, 10000)
     joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
@@ -82,8 +82,8 @@ class EmployeeTest < Minitest::Test
     joan.performance(true)
     roger.performance(true)
     department.assign(don, roger, joan)
-    department.increase(3000)
-    assert_equal 11000, roger.salary
+    department.increase(3000) {|e| e.satisfactory == true && e.name == "Roger"}
+    assert_equal 13000, roger.salary
     assert_equal 33000, department.total_salary
   end
 

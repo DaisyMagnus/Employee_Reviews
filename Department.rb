@@ -1,6 +1,6 @@
 class Department < Employee
   attr_reader :employees, :name, :reviews, :salary
-  def initialize(name)
+  def initialize(name:)
     @name = name
     @employees = []
     @salary = salary
@@ -16,9 +16,12 @@ class Department < Employee
   end
 
   def increase(amount)
-    eligible = @employees.select {|e| e.satisfactory == true}
+    eligible = @employees.select {|e| yield(e)}
     pay = amount/(eligible.length)
     eligible.each {|e| e.salary = (pay + e.salary)}
+#     department.give_raises(5000) do |employee|
+#   employee.salary < 100000
+# end
    end
 end
 
