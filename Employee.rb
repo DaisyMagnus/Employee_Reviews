@@ -1,5 +1,6 @@
 class Employee
-  attr_reader :name, :email, :phone_number, :salary, :reviews, :satisfactory
+  attr_reader :name, :email, :phone_number, :reviews, :satisfactory
+  attr_accessor :salary
 def initialize(name, email, phone_number, salary=0)
   @name = name
   @salary = salary
@@ -15,11 +16,10 @@ end
 
 def performance(value)
   @satisfactory = value
-  # if value == true
-  #   @satisfactory = true
-  # else
-  #   @satisfactory = false
-  # end
 end
 
+def bonus(percent)
+  @salary = (salary * percent) + salary
+  return salary
+end
 end

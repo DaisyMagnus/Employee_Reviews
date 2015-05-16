@@ -19,28 +19,20 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_create_employee_with_name
-    don = Employee.new("Don", "don@don.com", 1231231234, 10000)
-    tom = Employee.new("Tom", "tom@don.com", 1231231234, 10000)
-    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    don = Employee.new("Don", "don@scdp.com", 1231231234, 10000)
+    tom = Employee.new("Tom", "tom@scdp.com", 1231231234, 10000)
+    joan = Employee.new("Joan", "joan@scdp.com", 1231235555, 10000)
     assert_equal "Joan", joan.name
-    # assert_equal "Peggy", Employee.new("Peggy").name
     assert_equal "Don", don.name
-    # assert_equal "Roger", Employee.new("Roger").name
-    # assert_equal "Pete", Employee.new("Pete").name
-    # assert {"Peggy"=> {:name => name, :salary => 8000, :phone => 9193567878, :email => "peggy@scdp.com"}}
-    # assert {"Don"=>{:name => name, :salary => 20000, :phone => 9193569999, :email => "dondraper@scdp.com"}}
-    # assert {"Roger"=>{:salary => 25000, :phone => 9195556677, :email => "rogersterling@scdp.com"}}
-    # assert {"Joan"=>{:salary => 15000, :phone => 9199192222, :email => "joanie@scdp.com"}}
-
-  end
+    end
 
 
   def test_add_employee_to_department
-    don = Employee.new("Don", "don@don.com", 1231231234, 10000)
-    tom = Employee.new("Tom", "tom@don.com", 1231231234, 10000)
-    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    don = Employee.new("Don", "don@scdp.com", 1231231234, 10000)
+    pete = Employee.new("Pete", "pete@scdp.com", 1231231234, 10000)
+    joan = Employee.new("Joan", "joan@scdp.com", 1231235555, 10000)
     department = Department.new("Advertising")
-    department.assign(tom)
+    department.assign(pete)
     department.assign(don)
     department.assign(joan)
     assert_equal 3, department.employees.length
@@ -61,7 +53,7 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_add_text_review_to_employee
-    roger = Employee.new("Roger", "roger@don.com", 1231235557, 10000)
+    roger = Employee.new("Roger", "roger@scdp.com", 1231235557, 10000)
     roger.add_review("Roger has been a team player and kind soul.")
     assert_equal "Roger has been a team player and kind soul.", roger.reviews[0]
   end
@@ -75,6 +67,25 @@ class EmployeeTest < Minitest::Test
     assert_equal false, joan.satisfactory
   end
 
+  def test_give_raise_to_individual
+    roger = Employee.new("Roger", "roger@scdp.com", 1231235557, 10000)
+    roger.bonus(0.10)
+    assert_equal 11000, roger.salary
+  end
+
+  def test_give_raise_to_department
+    department = Department.new("Advertising")
+    don = Employee.new("Don", "don@don.com", 1231231234, 10000)
+    roger = Employee.new("Roger", "roger@don.com", 1231231234, 10000)
+    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    don.performance(true)
+    joan.performance(true)
+    roger.performance(true)
+    department.assign(don, roger, joan)
+    department.increase(3000)
+    assert_equal 11000, roger.salary
+    assert_equal 33000, department.total_salary
+  end
 
   # end
 

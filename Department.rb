@@ -8,18 +8,18 @@ class Department < Employee
 
 
   def assign(*name)
-    @employees << name
+    name.each {|e| @employees << e}
   end
 
   def total_salary
-    @employees.reduce {|sum, e| e.salary + sum}
-
+    @employees.reduce(0) {|sum, e| e.salary + sum}
   end
 
-  # def add_reviews
-  #   @reviews.merge!(name: "")
-  # end
-
+  def increase(amount)
+    eligible = @employees.select {|e| e.satisfactory == true}
+    pay = amount/(eligible.length)
+    eligible.each {|e| e.salary = (pay + e.salary)}
+   end
 end
 
 
