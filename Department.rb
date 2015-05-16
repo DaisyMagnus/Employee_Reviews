@@ -19,10 +19,8 @@ class Department < Employee
     eligible = @employees.select {|e| yield(e)}
     pay = amount/(eligible.length)
     eligible.each {|e| e.salary = (pay + e.salary)}
-#     department.give_raises(5000) do |employee|
-#   employee.salary < 100000
-# end
    end
+
 end
 
 

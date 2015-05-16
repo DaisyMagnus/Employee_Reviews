@@ -53,9 +53,15 @@ class EmployeeTest < Minitest::Test
   end
 
   def test_add_text_review_to_employee
+    don = Employee.new("Don", "don@don.com", 1231231234, 10000)
+    don.add_review("Don is a very positive person and encourages those around him, but he has not done well technically this year.  There are two areas in which Zeke has room for improvement.  First, when communicating verbally (and sometimes in writing), he has a tendency to use more words than are required.  This conversational style does put people at ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause confusion.
+    Second, when discussing new requirements with project managers, less of the information is retained by Zeke long-term than is expected.  This has a few negative consequences: 1) time is spent developing features that are not useful and need to be re-run, 2) bugs are introduced in the code and not caught because the tests lack the same information, and 3) clients are told that certain features are complete when they are inadequate.  This communication limitation could be the fault of project management, but given that other developers appear to retain more information, this is worth discussing further.")
     roger = Employee.new("Roger", "roger@scdp.com", 1231235557, 10000)
     roger.add_review("Roger has been a team player and kind soul.")
     assert_equal "Roger has been a team player and kind soul.", roger.reviews[0]
+    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    joan.add_review("Wanda has been an incredibly consistent and effective developer.  Clients are always satisfied with her work, developers are impressed with her productivity, and she's more than willing to help others even when she has a substantial workload of her own.  She is a great asset to Awesome Company, and everyone enjoys working with her.  During the past year, she has largely been devoted to work with the Cement Company, and she is the perfect woman for the job.  We know that work on a single project can become monotonous, however, so over the next few months, we hope to spread some of the Cement Company work to others.  This will also allow Wanda to pair more with others and spread her effectiveness to other projects.
+      ")
   end
 
   def test_satisfactorily_or_not
@@ -87,17 +93,13 @@ class EmployeeTest < Minitest::Test
     assert_equal 33000, department.total_salary
   end
 
-  # end
+  def test_parse_employee_review
+    don = Employee.new("Don", "don@don.com", 1231231234, 10000)
+    don.add_review("Don is a very positive person and encourages those around him, but he has not done well technically this year.  There are two areas in which Zeke has room for improvement.  First, when communicating verbally (and sometimes in writing), he has a tendency to use more words than are required.  This conversational style does put people at ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause confusion.
+    Second, when discussing new requirements with project managers, less of the information is retained by Zeke long-term than is expected.  This has a few negative consequences: 1) time is spent developing features that are not useful and need to be re-run, 2) bugs are introduced in the code and not caught because the tests lack the same information, and 3) clients are told that certain features are complete when they are inadequate.  This communication limitation could be the fault of project management, but given that other developers appear to retain more information, this is worth discussing further.")
+    don.parse_review
+    assert_equal false, don.parse_review
 
-  # def test_add_employee_review
-  #   assert_equal "Peggy continues to be a strong leader, creative mind, and an asset to the team.
-  #    She spearheaded the Virginia Slims campaign, which was one of our biggest account of last year.
-  #    She started out as a secretary and it's quite astounding to see how far she has come in
-  #    a short amount of time.", Department.new("Peggy").add_reviews[:Peggy]
-  # end
-
-  # def mark_whether_employee_performing_well
-  #   assert_equal "Satisfactory", Department.new("Peggy").add_reviews[:evaluation]
-  # end
+  end
 
 end

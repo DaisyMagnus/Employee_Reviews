@@ -22,4 +22,14 @@ def bonus(percent)
   @salary = (salary * percent) + salary
   return salary
 end
+
+def parse_review
+  x =  @reviews.select {|r| r =~ /.b../}
+    if (x[0].split.include?("but"))
+      false
+    else
+      true
+    end
+end
+
 end
