@@ -22,6 +22,3 @@ class Department < Employee
    end
 
 end
-
-
-# {:Draper => 1500, :Sterling => 2000, :Cooper => 1000, :Price => 750}

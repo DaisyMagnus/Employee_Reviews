@@ -32,4 +32,14 @@ def parse_review
     end
 end
 
+def email
+  if @email =~ /@([\da-z\.-]+)\.([a-z\.]{3})/
+    @email
+  else
+    puts "Invalid Email Address"
+  end
+end
+
+
+
 end
