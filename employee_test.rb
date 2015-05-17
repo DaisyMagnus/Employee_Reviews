@@ -86,14 +86,14 @@ class EmployeeTest < Minitest::Test
     department = Department.new(name: "Advertising")
     don = Employee.new("Don", "don@don.com", 1231231234, 10000)
     roger = Employee.new("Roger", "roger@don.com", 1231231234, 10000)
-    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    joan = Employee.new("Joan", "joan@don.com", 1231235555, 8000)
     don.performance(true)
     joan.performance(true)
     roger.performance(true)
     department.assign(don, roger, joan)
     department.increase(3000) {|e| e.satisfactory == true && e.name == "Roger"}
     assert_equal 13000, roger.salary
-    assert_equal 33000, department.total_salary
+    assert_equal 31000, department.total_salary
   end
 
   def test_parse_employee_review
