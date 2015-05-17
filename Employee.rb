@@ -24,8 +24,8 @@ def bonus(percent)
 end
 
 def parse_review
-  x =  @reviews.select {|r| r =~ /.b../}
-    if (x[0].split.include?("but"))
+   x =  @reviews.select {|r| r =~ /.b../}
+     if (x[0].split.include?("but"))
       false
     else
       true
