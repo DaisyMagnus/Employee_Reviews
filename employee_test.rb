@@ -102,7 +102,10 @@ class EmployeeTest < Minitest::Test
     Second, when discussing new requirements with project managers, less of the information is retained by Don long-term than is expected.  This has a few negative consequences: 1) time is spent developing features that are not useful and need to be re-run, 2) bugs are introduced in the code and not caught because the tests lack the same information, and 3) clients are told that certain features are complete when they are inadequate.  This communication limitation could be the fault of project management, but given that other developers appear to retain more information, this is worth discussing further.")
     don.parse_review
     assert_equal false, don.parse_review
-
+    joan = Employee.new("Joan", "joan@don.com", 1231235555, 10000)
+    joan.add_review("Joan has been an incredibly consistent and effective developer.  Clients are always satisfied with her work, developers are impressed with her productivity, and she's more than willing to help others even when she has a substantial workload of her own.  She is a great asset to Awesome Company, and everyone enjoys working with her.  During the past year, she has largely been devoted to work with the Cement Company, and she is the perfect woman for the job.  We know that work on a single project can become monotonous, however, so over the next few months, we hope to spread some of the Cement Company work to others.  This will also allow Joan to pair more with others and spread her effectiveness to other projects.")
+    joan.parse_review
+    assert_equal true, joan.parse_review
   end
 
 end
