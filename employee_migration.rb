@@ -13,7 +13,8 @@ class EmployeeMigration < ActiveRecord::Migration
       t.string :phone_number
       t.decimal :salary, precision: 2, scale: 8
       t.text    :reviews
-      t.boolean :satisfactory
+      t.boolean :meets_standard?
+      t.references :department
       t.timestamp null: false
     end
   end

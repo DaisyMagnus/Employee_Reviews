@@ -10,16 +10,14 @@ class Employee <ActiveRecord::Base
   # attr_reader :name, :email, :phone_number, :reviews, :satisfactory
   # attr_accessor :salary
   belongs_to :department
-def add_review(review)
-  reviews
-end
 
-def performance(value)
-  satisfactory = value
-end
+
+# def performance(value)
+#   satisfactory = value
+# end
 
 def bonus(percent)
-  salary = (salary * percent) + salary
+  self.salary += (salary * percent)
 end
 
 def parse_review
