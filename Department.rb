@@ -1,24 +1,21 @@
-class Department < Employee
-  attr_reader :employees, :name, :reviews, :salary
-  def initialize(name:)
-    @name = name
-    @employees = []
-    @salary = salary
+class Department <ActiveRecord::Base
+  # attr_reader :name, :email, :phone_number, :reviews, :satisfactory
+  # attr_accessor :salary
+  has_many :employees
+
+
+  def assign(name)
+    employees << name
   end
 
-
-  def assign(*name)
-    name.each {|e| @employees << e}
-  end
-
-  def total_salary
-    @employees.reduce(0) {|sum, e| e.salary + sum}
-  end
-
-  def increase(amount)
-    eligible = @employees.select {|e| yield(e)}
-    pay = amount/(eligible.length)
-    eligible.each {|e| e.salary = (pay + e.salary)}
-   end
+  # def total_salary
+  #   employees.reduce(0) {|sum, e| e.salary + sum}
+  # end
+  #
+  # def increase(amount)
+  #   eligible = @employees.select {|e| yield(e)}
+  #   pay = amount/(eligible.length)
+  #   eligible.each {|e| e.salary = (pay + e.salary)}
+  # end
 
 end

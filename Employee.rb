@@ -1,45 +1,30 @@
-class Employee
-  attr_reader :name, :email, :phone_number, :reviews, :satisfactory
-  attr_accessor :salary
-def initialize(name, email, phone_number, salary=0)
-  @name = name
-  @salary = salary
-  @email = email
-  @phone_number = phone_number
-  @reviews = []
-  @satisfactory = nil
-end
+require 'active_record'
 
+ActiveRecord::Base.establish_connection(
+  adapter:  'sqlite3',
+  database: 'db.sqlite3'
+)
+
+
+class Employee <ActiveRecord::Base
+  # attr_reader :name, :email, :phone_number, :reviews, :satisfactory
+  # attr_accessor :salary
+  belongs_to :department
 def add_review(review)
-  @reviews << review
+  reviews
 end
 
 def performance(value)
-  @satisfactory = value
+  satisfactory = value
 end
 
 def bonus(percent)
-  @salary = (salary * percent) + salary
-  return salary
+  salary = (salary * percent) + salary
 end
 
 def parse_review
-   x =  @reviews.select {|r| r =~ /.b../}
-     if (x[0].split.include?("but"))
-      false
-    else
-      true
-    end
+   !(@reviews.include?("but"))
 end
-
-def email
-  if @email =~ /@([\da-z\.-]+)\.([a-z\.]{3})/
-    @email
-  else
-    puts "Invalid Email Address"
-  end
-end
-
 
 
 end
