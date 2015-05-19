@@ -18,4 +18,8 @@ class Department <ActiveRecord::Base
     eligible.each {|e| e.salary = (pay + e.salary)}
   end
 
+  def arrange(field)
+    field.order
+  end
+
 end

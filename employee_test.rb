@@ -87,7 +87,7 @@ class EmployeeTest < Minitest::Test
     assert_equal 11000, peggy.salary
   end
 
-  def  test_give_raise_to_department
+  def test_give_raise_to_department
     joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000, meets_standard?: true)
     peggy = Employee.create(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000, meets_standard?: false)
     department = Department.create(name: "Advertising")
@@ -99,5 +99,43 @@ class EmployeeTest < Minitest::Test
     assert_equal 18000, department.total_salary
   end
 
+  def test_return_the_total_number_of_employees_in_a_department
+    don = Employee.new(name: "Don", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+    roger = Employee.new(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+    joan = Employee.new(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+    peggy = Employee.new(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+    department = Department.create(name: "Advertising")
+    department.assign(joan)
+    department.assign(peggy)
+    department.assign(don)
+    department.assign(roger)
+    assert_equal 4, department.employees.length
+  end
+
+  def test_return_the_employee_who_is_being_paid_the_least_in_a_department
+    don = Employee.create(name: "Don", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+    roger = Employee.create(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+    joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+    peggy = Employee.create(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+    department = Department.create(name: "Advertising")
+    department.assign(joan)
+    department.assign(peggy)
+    department.assign(don)
+    list = department.employees.order(:salary)
+    assert_equal peggy, list.first
+  end
+
+  def test_return_all_employees_in_a_department_ordered_alphabetically_by_name
+    don = Employee.create(name: "Don", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+    roger = Employee.create(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+    joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+    peggy = Employee.create(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+    department = Department.create(name: "Advertising")
+    department.assign(joan)
+    department.assign(peggy)
+    department.assign(don)
+    list = department.employees.order(:name)
+    assert_equal don, list.first
+  end
 
  end
