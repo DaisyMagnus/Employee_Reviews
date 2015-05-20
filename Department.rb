@@ -29,15 +29,24 @@ class Department <ActiveRecord::Base
  end
 
 def palindrome
-  new_array = employees.map {|employee| employee.name}
-  palindrome_names = []
-  new_array.each do |name|
-    if name.reverse == name
-      true
-      palindrome_names << name
-    else
-      false
-    end
+  array = employees.map do |employees|
+    employees.name.reverse.downcase
   end
+   return backwards_names = array.reject {|n| n.reverse.downcase != n.downcase}
+end
+
+
+
+
+  # new_array = employees.map {|employee| employee.name}
+  # palindrome_names = []
+  # new_array.each do |name|
+  #   if name.reverse == name
+  #     true
+  #     palindrome_names << name
+  #   else
+  #     false
+  #   end
+
 
 end

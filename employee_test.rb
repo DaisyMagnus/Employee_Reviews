@@ -160,7 +160,7 @@ class EmployeeTest < Minitest::Test
     department.assign(joan)
     department.assign(ava)
     department.assign(otto)
-    assert_equal ["ava", "otto"], department.palindrome?
+    assert_equal ["otto", "ava"], department.palindrome
   end
 
  end
