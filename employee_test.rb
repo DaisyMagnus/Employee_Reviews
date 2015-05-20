@@ -163,4 +163,23 @@ class EmployeeTest < Minitest::Test
     assert_equal ["otto", "ava"], department.palindrome
   end
 
+  def test_call_individual_departments
+    halah = Employee.create(name: "Halah", email: "halah@scdp.com", phone_number: "1231231234", salary: 10000)
+    ava = Employee.create(name: "Ava", email:"ava@scdp.com", phone_number: "1231231234", salary: 10000)
+    joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+    peggy = Employee.create(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+    advertising = Department.create(name: "Advertising")
+    advertising.assign(halah)
+    advertising.assign(ava)
+    advertising.assign(joan)
+    advertising.assign(peggy)
+
+    don = Employee.create(name: "Don", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+    roger = Employee.create(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+    finance = Department.create(name: "Finance")
+    finance.assign(don)
+    finance.assign(roger)
+
+    assert_equal ["Advertising", 4, "Finance", 2], finance.employee_count
+  end
  end

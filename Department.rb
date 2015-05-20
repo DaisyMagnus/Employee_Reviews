@@ -28,25 +28,25 @@ class Department <ActiveRecord::Base
    employees.select {|employee| employee.salary > average}
  end
 
-def palindrome
-  array = employees.map do |employees|
-    employees.name.reverse.downcase
+  def palindrome
+    array = employees.map do |employees|
+      employees.name.reverse.downcase
+    end
+     return backwards_names = array.reject {|n| n.reverse.downcase != n.downcase}
   end
-   return backwards_names = array.reject {|n| n.reverse.downcase != n.downcase}
-end
 
-
-
-
-  # new_array = employees.map {|employee| employee.name}
-  # palindrome_names = []
-  # new_array.each do |name|
-  #   if name.reverse == name
-  #     true
-  #     palindrome_names << name
-  #   else
-  #     false
-  #   end
-
-
+  def employee_count
+    match = []
+    division_id = Department.all.map do |d|
+      Employee.all.map do |e|
+        if d.id == e.department_id
+          match << d.name
+        end
+      end
+    end
+    match
+    count = Hash.new{0}
+    match.each {|match| count[match] +=1}
+    count.flatten
+  end
 end
