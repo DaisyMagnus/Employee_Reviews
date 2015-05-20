@@ -22,4 +22,22 @@ class Department <ActiveRecord::Base
     field.order
   end
 
+ def employees_above_average_salary
+   total = employees.map {|employee| employee.salary}
+   average = total.reduce(:+)/employees.count
+   employees.select {|employee| employee.salary > average}
+ end
+
+def palindrome
+  new_array = employees.map {|employee| employee.name}
+  palindrome_names = []
+  new_array.each do |name|
+    if name.reverse == name
+      true
+      palindrome_names << name
+    else
+      false
+    end
+  end
+
 end

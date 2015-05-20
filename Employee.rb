@@ -12,5 +12,6 @@ class Employee <ActiveRecord::Base
     self.salary += (salary * percent)
   end
 
+  
 
 end

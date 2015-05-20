@@ -11,7 +11,7 @@ class EmployeeMigration < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :phone_number
-      t.decimal :salary, precision: 2, scale: 8
+      t.float :salary, precision: 2, scale: 8
       t.text    :reviews
       t.boolean :meets_standard?
       t.references :department

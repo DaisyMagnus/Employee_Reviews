@@ -138,4 +138,29 @@ class EmployeeTest < Minitest::Test
     assert_equal don, list.first
   end
 
+  def test_find_employees_with_salary_below_avgerage
+   don = Employee.create(name: "Don", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+   roger = Employee.create(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+   joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+   peggy = Employee.create(name: "Peggy", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+   department = Department.create(name: "Advertising")
+   department.assign(don)
+   department.assign(roger)
+   department.assign(joan)
+   department.assign(peggy)
+   assert_equal [don, roger, joan], department.employees_above_average_salary
+ end
+
+  def test_return_all_employees_with_names_which_are_palindromes
+    otto = Employee.create(name: "Otto", email: "don@scdp.com", phone_number: "1231231234", salary: 10000)
+    roger = Employee.create(name: "Roger", email:"roger@scdp.com", phone_number: "1231231234", salary: 10000)
+    joan = Employee.create(name: "Joan", email: "joan@scdp.com", phone_number: "1231235555", salary: 10000)
+    ava = Employee.create(name: "Ava", email: "peggy@abc.com", phone_number: "9195552222", salary: 5000)
+    department = Department.create(name: "Advertising")
+    department.assign(joan)
+    department.assign(ava)
+    department.assign(otto)
+    assert_equal ["ava", "otto"], department.palindrome?
+  end
+
  end
